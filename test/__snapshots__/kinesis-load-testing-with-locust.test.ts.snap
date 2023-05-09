@@ -494,7 +494,7 @@ Object {
         "ImageId": Object {
           "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amikernel510hvmarm64gp2C96584B6F00A464EAD1953AFF4B05118Parameter",
         },
-        "InstanceType": "c7g.16xlarge",
+        "InstanceType": "c7g.xlarge",
         "SecurityGroupIds": Array [
           Object {
             "Fn::GetAtt": Array [
@@ -523,7 +523,7 @@ aws s3 cp 's3://",
                 Object {
                   "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-central-1",
                 },
-                "/ba8eac0e021f620b84a303a25a845d043e8e1b98f53edf13bd6ea718c58edff1.zip' '/usr/local/load-test/load-test-assets.zip'
+                "/acebd54c7a66b31ee4e5f5eb30938c759f09a16b1228291b2e7a3d45f96aa6eb.zip' '/usr/local/load-test/load-test-assets.zip'
 mkdir -p $(dirname '/etc/systemd/system/locust.service')
 aws s3 cp 's3://",
                 Object {
