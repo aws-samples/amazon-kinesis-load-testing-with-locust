@@ -1,3 +1,5 @@
+[![Build & Test](https://github.com/aws-samples/amazon-kinesis-load-testing-with-locust/actions/workflows/build-and-test-cdk.yml/badge.svg)](https://github.com/aws-samples/amazon-kinesis-load-testing-with-locust/actions/workflows/build-and-test-cdk.yml)
+
 # Amazon Kinesis Load Testing with Locust
 
 Easy [Amazon Kinesis](https://aws.amazon.com/kinesis/) load testing with [Locust](https://locust.io/) - a modern load testing framework.
