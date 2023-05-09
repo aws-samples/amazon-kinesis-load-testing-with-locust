@@ -1,0 +1,738 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`KinesisLoadTestingWithLocustStack Snapshot test 1`] = `
+Object {
+  "Outputs": Object {
+    "locustdashboardurl": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "http://",
+            Object {
+              "Fn::GetAtt": Array [
+                "kinesisloadtestingwithlocustinstance56EDDEC9",
+                "PublicIp",
+              ],
+            },
+            ":8089",
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amikernel510hvmarm64gp2C96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/aws/service/ami-amazon-linux-latest/amzn2-ami-kernel-5.10-hvm-arm64-gp2",
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+    },
+  },
+  "Resources": Object {
+    "VPCB9E5F0B4": Object {
+      "Properties": Object {
+        "CidrBlock": "10.0.0.0/16",
+        "EnableDnsHostnames": true,
+        "EnableDnsSupport": true,
+        "InstanceTenancy": "default",
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "KinesisLoadTestingWithLocustStack/VPC",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::VPC",
+    },
+    "VPCIGWB7E252D3": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "KinesisLoadTestingWithLocustStack/VPC",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::InternetGateway",
+    },
+    "VPCPrivateSubnet1DefaultRouteAE1D6490": Object {
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": Object {
+          "Ref": "VPCPublicSubnet1NATGatewayE0556630",
+        },
+        "RouteTableId": Object {
+          "Ref": "VPCPrivateSubnet1RouteTableBE8A6027",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "VPCPrivateSubnet1RouteTableAssociation347902D1": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "VPCPrivateSubnet1RouteTableBE8A6027",
+        },
+        "SubnetId": Object {
+          "Ref": "VPCPrivateSubnet1Subnet8BCA10E0",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "VPCPrivateSubnet1RouteTableBE8A6027": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "KinesisLoadTestingWithLocustStack/VPC/PrivateSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "VPCB9E5F0B4",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "VPCPrivateSubnet1Subnet8BCA10E0": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            0,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.128.0/18",
+        "MapPublicIpOnLaunch": false,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "KinesisLoadTestingWithLocustStack/VPC/PrivateSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "VPCB9E5F0B4",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "VPCPrivateSubnet2DefaultRouteF4F5CFD2": Object {
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": Object {
+          "Ref": "VPCPublicSubnet2NATGateway3C070193",
+        },
+        "RouteTableId": Object {
+          "Ref": "VPCPrivateSubnet2RouteTable0A19E10E",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "VPCPrivateSubnet2RouteTable0A19E10E": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "KinesisLoadTestingWithLocustStack/VPC/PrivateSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "VPCB9E5F0B4",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "VPCPrivateSubnet2RouteTableAssociation0C73D413": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "VPCPrivateSubnet2RouteTable0A19E10E",
+        },
+        "SubnetId": Object {
+          "Ref": "VPCPrivateSubnet2SubnetCFCDAA7A",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "VPCPrivateSubnet2SubnetCFCDAA7A": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            1,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.192.0/18",
+        "MapPublicIpOnLaunch": false,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "KinesisLoadTestingWithLocustStack/VPC/PrivateSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "VPCB9E5F0B4",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "VPCPublicSubnet1DefaultRoute91CEF279": Object {
+      "DependsOn": Array [
+        "VPCVPCGW99B986DC",
+      ],
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": Object {
+          "Ref": "VPCIGWB7E252D3",
+        },
+        "RouteTableId": Object {
+          "Ref": "VPCPublicSubnet1RouteTableFEE4B781",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "VPCPublicSubnet1EIP6AD938E8": Object {
+      "Properties": Object {
+        "Domain": "vpc",
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "KinesisLoadTestingWithLocustStack/VPC/PublicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "VPCPublicSubnet1NATGatewayE0556630": Object {
+      "DependsOn": Array [
+        "VPCPublicSubnet1DefaultRoute91CEF279",
+        "VPCPublicSubnet1RouteTableAssociation0B0896DC",
+      ],
+      "Properties": Object {
+        "AllocationId": Object {
+          "Fn::GetAtt": Array [
+            "VPCPublicSubnet1EIP6AD938E8",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": Object {
+          "Ref": "VPCPublicSubnet1SubnetB4246D30",
+        },
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "KinesisLoadTestingWithLocustStack/VPC/PublicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "VPCPublicSubnet1RouteTableAssociation0B0896DC": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "VPCPublicSubnet1RouteTableFEE4B781",
+        },
+        "SubnetId": Object {
+          "Ref": "VPCPublicSubnet1SubnetB4246D30",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "VPCPublicSubnet1RouteTableFEE4B781": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "KinesisLoadTestingWithLocustStack/VPC/PublicSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "VPCB9E5F0B4",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "VPCPublicSubnet1SubnetB4246D30": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            0,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.0.0/18",
+        "MapPublicIpOnLaunch": true,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "KinesisLoadTestingWithLocustStack/VPC/PublicSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "VPCB9E5F0B4",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "VPCPublicSubnet2DefaultRouteB7481BBA": Object {
+      "DependsOn": Array [
+        "VPCVPCGW99B986DC",
+      ],
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": Object {
+          "Ref": "VPCIGWB7E252D3",
+        },
+        "RouteTableId": Object {
+          "Ref": "VPCPublicSubnet2RouteTable6F1A15F1",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "VPCPublicSubnet2EIP4947BC00": Object {
+      "Properties": Object {
+        "Domain": "vpc",
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "KinesisLoadTestingWithLocustStack/VPC/PublicSubnet2",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "VPCPublicSubnet2NATGateway3C070193": Object {
+      "DependsOn": Array [
+        "VPCPublicSubnet2DefaultRouteB7481BBA",
+        "VPCPublicSubnet2RouteTableAssociation5A808732",
+      ],
+      "Properties": Object {
+        "AllocationId": Object {
+          "Fn::GetAtt": Array [
+            "VPCPublicSubnet2EIP4947BC00",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": Object {
+          "Ref": "VPCPublicSubnet2Subnet74179F39",
+        },
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "KinesisLoadTestingWithLocustStack/VPC/PublicSubnet2",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "VPCPublicSubnet2RouteTable6F1A15F1": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "KinesisLoadTestingWithLocustStack/VPC/PublicSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "VPCB9E5F0B4",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "VPCPublicSubnet2RouteTableAssociation5A808732": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "VPCPublicSubnet2RouteTable6F1A15F1",
+        },
+        "SubnetId": Object {
+          "Ref": "VPCPublicSubnet2Subnet74179F39",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "VPCPublicSubnet2Subnet74179F39": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            1,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.64.0/18",
+        "MapPublicIpOnLaunch": true,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "KinesisLoadTestingWithLocustStack/VPC/PublicSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "VPCB9E5F0B4",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "VPCVPCGW99B986DC": Object {
+      "Properties": Object {
+        "InternetGatewayId": Object {
+          "Ref": "VPCIGWB7E252D3",
+        },
+        "VpcId": Object {
+          "Ref": "VPCB9E5F0B4",
+        },
+      },
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+    },
+    "kinesisloadtestingwithlocustinstance56EDDEC9": Object {
+      "CreationPolicy": Object {
+        "ResourceSignal": Object {
+          "Count": 1,
+          "Timeout": "PT5M",
+        },
+      },
+      "DependsOn": Array [
+        "kinesislocustloadtestec2roleDefaultPolicyC60D7B98",
+        "kinesislocustloadtestec2role2E226CA6",
+      ],
+      "Metadata": Object {
+        "AWS::CloudFormation::Init": Object {
+          "config": Object {
+            "commands": Object {
+              "000": Object {
+                "command": "unzip load-test-assets.zip",
+                "cwd": "/usr/local/load-test",
+              },
+              "001": Object {
+                "command": "pip3 install --upgrade pip",
+              },
+              "002": Object {
+                "command": "pip3 install -r requirements.txt",
+                "cwd": "/usr/local/load-test",
+              },
+              "003": Object {
+                "command": "PATH=/usr/local/bin:$PATH && REGION=eu-central-1",
+              },
+            },
+            "packages": Object {
+              "yum": Object {
+                "gcc": Array [],
+                "python3-devel": Array [],
+              },
+            },
+            "services": Object {
+              "sysvinit": Object {
+                "locust": Object {
+                  "commands": Array [
+                    "003",
+                  ],
+                  "enabled": true,
+                  "ensureRunning": true,
+                },
+              },
+            },
+          },
+          "configSets": Object {
+            "default": Array [
+              "config",
+            ],
+          },
+        },
+      },
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            0,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "IamInstanceProfile": Object {
+          "Ref": "kinesisloadtestingwithlocustinstanceInstanceProfileE095B9C3",
+        },
+        "ImageId": Object {
+          "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amikernel510hvmarm64gp2C96584B6F00A464EAD1953AFF4B05118Parameter",
+        },
+        "InstanceType": "c7g.16xlarge",
+        "SecurityGroupIds": Array [
+          Object {
+            "Fn::GetAtt": Array [
+              "kinesisloadtestingwithlocustsg0D3CD02E",
+              "GroupId",
+            ],
+          },
+        ],
+        "SubnetId": Object {
+          "Ref": "VPCPublicSubnet1SubnetB4246D30",
+        },
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "kinesis-load-testing-with-locust-instance",
+          },
+        ],
+        "UserData": Object {
+          "Fn::Base64": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "#!/bin/bash
+mkdir -p $(dirname '/usr/local/load-test/load-test-assets.zip')
+aws s3 cp 's3://",
+                Object {
+                  "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-central-1",
+                },
+                "/ba8eac0e021f620b84a303a25a845d043e8e1b98f53edf13bd6ea718c58edff1.zip' '/usr/local/load-test/load-test-assets.zip'
+mkdir -p $(dirname '/etc/systemd/system/locust.service')
+aws s3 cp 's3://",
+                Object {
+                  "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-central-1",
+                },
+                "/608ff74aea79c251ff661d527c78b229f4f7928a4e8b7e3a7c9810f62c4c7863.service' '/etc/systemd/system/locust.service'
+# fingerprint: 123ae2d4c1e74084
+(
+  set +e
+  /opt/aws/bin/cfn-init -v --region ",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                " --stack ",
+                Object {
+                  "Ref": "AWS::StackName",
+                },
+                " --resource kinesisloadtestingwithlocustinstance56EDDEC9 -c default
+  /opt/aws/bin/cfn-signal -e $? --region ",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                " --stack ",
+                Object {
+                  "Ref": "AWS::StackName",
+                },
+                " --resource kinesisloadtestingwithlocustinstance56EDDEC9
+  cat /var/log/cfn-init.log >&2
+)",
+              ],
+            ],
+          },
+        },
+      },
+      "Type": "AWS::EC2::Instance",
+    },
+    "kinesisloadtestingwithlocustinstanceInstanceProfileE095B9C3": Object {
+      "Properties": Object {
+        "Roles": Array [
+          Object {
+            "Ref": "kinesislocustloadtestec2role2E226CA6",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+    "kinesisloadtestingwithlocustsg0D3CD02E": Object {
+      "Properties": Object {
+        "GroupDescription": "KinesisLoadTestingWithLocustStack/kinesis-load-testing-with-locust-sg",
+        "GroupName": "kinesis-load-testing-with-locust-sg",
+        "SecurityGroupEgress": Array [
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "SecurityGroupIngress": Array [
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allows Locust Dashboard access from Internet",
+            "FromPort": 8089,
+            "IpProtocol": "tcp",
+            "ToPort": 8089,
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "VPCB9E5F0B4",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "kinesislocustloadtestec2role2E226CA6": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "ec2.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonSSMManagedInstanceCore",
+              ],
+            ],
+          },
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonKinesisFullAccess",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "kinesislocustloadtestec2roleDefaultPolicyC60D7B98": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "arn:",
+                      Object {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":s3:::",
+                      Object {
+                        "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-central-1",
+                      },
+                    ],
+                  ],
+                },
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "arn:",
+                      Object {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":s3:::",
+                      Object {
+                        "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-central-1",
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            Object {
+              "Action": Array [
+                "cloudformation:DescribeStackResource",
+                "cloudformation:SignalResource",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Ref": "AWS::StackId",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "kinesislocustloadtestec2roleDefaultPolicyC60D7B98",
+        "Roles": Array [
+          Object {
+            "Ref": "kinesislocustloadtestec2role2E226CA6",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;

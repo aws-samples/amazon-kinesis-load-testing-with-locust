@@ -1,0 +1,11 @@
+[Unit]
+Description=Kinesis load testing with Locust service
+
+[Service]
+User=ec2-user
+WorkingDirectory=/usr/local/load-test
+ExecStart=/bin/bash -c './start-locust.sh'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
