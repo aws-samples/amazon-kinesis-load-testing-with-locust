@@ -56,7 +56,7 @@ By default, this project generates random temperature sensor readings for every 
 ```
 
 To adopt it to your needs, the project comes packaged with [Faker](https://faker.readthedocs.io/en/master/), that you can use to adopt the payload to your needs.
-If you want to use a different payload or payload format, please change it [here](load-test/locust-load-test.py#L60-75).
+If you want to use a different payload or payload format, please change it [here](load-test/locust-load-test.py#L61-L76).
 
 ### Test locally
 To test Locust out locally first, before deploying it to the cloud, Locust must be installed, for instructions, see [here](https://docs.locust.io/en/stable/installation.html). In order to send events to Kinesis from your local machine, you have to have AWS credentials, see also the documentation on [Configuration and credential file settings](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).
@@ -75,7 +75,7 @@ locust -f locust-load-test.py --loglevel DEBUG 2>&1 | grep -E "(locust|root)"
 To get started you first have to do the setup, as described [here](#setup). 
 You can access the dashboard by using the CDK Output `KinesisLoadTestingWithLocustStack.locustdashboardurl` to open the dashboard, e.g. http://1.2.3.4:8089.
 
-The Locust dashboard is password protected, by default it is set to Username `locust-user` and Password `locust-dashboard-pwd`, you can change it [here](load-test/locust.env#L4-5).
+The Locust dashboard is password protected, by default it is set to Username `locust-user` and Password `locust-dashboard-pwd`, you can change it [here](load-test/locust.env#L4-L5).
 
 With the default configuration, you can achieve up to 15.000 emitted events per second. Enter the number of Locust users (times the batch size), the spawn rate (users added per second) and the target Kinesis stream name as host.
 
@@ -99,7 +99,7 @@ Locust is created on the EC2 instance as a [systemd](https://systemd.io/) servic
 In order to achieve peak performance with Locust and Kinesis, there are a couple of things to keep in mind.
 
 ### Instance size
-Your performance is bound by the underlying EC2 instance, so check [recommended instance](#ec2-instance-type) for more information about scaling. In order to set the correct instance size, you can configure the instanze size [here](infrastructure/kinesis-locust-load-testing.ts#L28).
+Your performance is bound by the underlying EC2 instance, so check [recommended instance](#ec2-instance-type) for more information about scaling. In order to set the correct instance size, you can configure the instanze size [here](infrastructure/kinesis-load-testing-with-locust.ts#L28).
 
 ### Number of secondaries
 Locust benefits from a distributed setup. Therefore the setup spins up multiple secondaries, that do the actual work, and a primary, that does the coordination. In order to leverage the cores up to maximum, you should specify 1 secondary per core, you can configure the number [here](load-test/locust.env#L1).
@@ -149,7 +149,7 @@ load-test/                            -- Contains all the load testing scripts
 ```
 
 ## Remarks
-For simplicity of the setup and to reduce waiting times in the initial setup, the default VPC is used. If you want to create your custom VPC or reuse an already defined VPC, you can change it [here](infrastructure/kinesis-locust-load-testing.ts#L42).
+For simplicity of the setup and to reduce waiting times in the initial setup, the default VPC is used. If you want to create your custom VPC or reuse an already defined VPC, you can change it [here](infrastructure/kinesis-load-testing-with-locust.ts#L39-L42).
 
 The setup also requires, that the EC2 instance is accessible on port 8089 inside this VPC, so make sure an Internet Gateway is set up, and nothing restricts the port access (e.g. NACLs, ...).
 
