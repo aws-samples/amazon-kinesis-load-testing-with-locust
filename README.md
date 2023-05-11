@@ -7,11 +7,15 @@ Easy [Amazon Kinesis](https://aws.amazon.com/kinesis/) load testing with [Locust
 ## Table of contents
 
 - [Overview](#overview)
-- [Getting started](#getting-started)
-   - [Adopting the payload](#adopting-the-payload)
-   - [Test locally](#test-locally)
+- [Test locally](#test-locally)
+- [Cloud setup](#cloud-setup)
+   - [Bootstrap your environment](#bootstrap-your-environment)
+   - [Install dependencies](#install-dependencies)
+   - [CDK Deployment](#cdk-deployment)
    - [Accessing the Locust Dashboard](#accessing-the-locust-dashboard)
+   - [Adopting the payload](#adopting-the-payload)
    - [Configuration changes](#configuration-changes)
+   - [Destroy the stack](#destroy-the-stack)
 - [Large scale load testing](#large-scale-load-testing)
    - [Instance size](#instance-size)
    - [Number of secondaries](#number-of-secondaries)
@@ -19,11 +23,6 @@ Easy [Amazon Kinesis](https://aws.amazon.com/kinesis/) load testing with [Locust
    - [EC2 instance type](#ec2-instance-type)
 - [Project structure](#project-structure)
 - [Remarks](#remarks)
-- [Setup](#setup)
-   - [Bootstrap your environment](#bootstrap-your-environment)
-   - [Install dependencies](#install-dependencies)
-   - [CDK Deployment](#cdk-deployment)
-   - [Destroy the stack](#destroy-the-stack)
 - [Notice](#notice)
 - [Security](#security)
 - [License](#license)
@@ -43,33 +42,55 @@ In our testing with the largest [recommended instance](#ec2-instance-type) - `c7
 
 Alternatively your can use the [Amazon Kinesis Data Generator](https://github.com/awslabs/amazon-kinesis-data-generator), which provides you with a hosted UI to set up Kinesis load tests. As this approach is browser based, you are limited by the bandwidth of your current connection, the round trip latency and have to keep the browser tab open to continue sending events.
 
-## Getting started
-### Adopting the payload
-By default, this project generates random temperature sensor readings for every sensor with this format:
-```json
- {
-    "sensorId": "bfbae19c-2f0f-41c2-952b-5d5bc6e001f1_1",
-    "temperature": 147.24,
-    "status": "OK",
-    "timestamp": 1675686126310
- }
+## Test locally
+To test Locust out locally first, before deploying it to the cloud, you have to install the necessary dependencies.
+
+Navigate to the `load-test` directory and run:
+
+```bash
+pip install -r requirements.txt
 ```
 
-To adopt it to your needs, the project comes packaged with [Faker](https://faker.readthedocs.io/en/master/), that you can use to adopt the payload to your needs.
-If you want to use a different payload or payload format, please change it [here](load-test/locust-load-test.py#L61-L76).
+In order to send events to Kinesis from your local machine, you have to have AWS credentials, see also the documentation on [Configuration and credential file settings](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
 
-### Test locally
-To test Locust out locally first, before deploying it to the cloud, Locust must be installed, for instructions, see [here](https://docs.locust.io/en/stable/installation.html). In order to send events to Kinesis from your local machine, you have to have AWS credentials, see also the documentation on [Configuration and credential file settings](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).
+To perform now the test locally, stay in the `load-test` directory and run:
 
-To execute the test locally, navigate to the `load-test` directory and execute:
 ```bash
 locust -f locust-load-test.py
 ```
+
+You can now access the Locust dashboard via http://0.0.0.0:8089/. Enter the number of Locust users, the spawn rate (users added per second) and the target Amazon Kinesis data stream name as host.
+
+![Setup stream details local](img/Setup%20stream%20details%20local.png)
+
 
 In order to get the generated events logged out, run this command, it will filter only locust and root logs (e.g. no botocore logs):
 ```bash
 locust -f locust-load-test.py --loglevel DEBUG 2>&1 | grep -E "(locust|root)"
 ```
+
+## Cloud setup
+This project relies on [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html) and [TypeScript](https://www.typescriptlang.org/), for installation instructions look [here](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html#getting_started_install). 
+For further information you can also checkout [this Workshop](https://cdkworkshop.com/) and [this Getting Started](https://aws.amazon.com/getting-started/guides/setup-cdk/).
+
+### Bootstrap your environment
+```bash
+cdk bootstrap aws://ACCOUNT-NUMBER/REGION       # e.g. cdk bootstrap aws://123456789012/us-east-1
+```
+
+For more details, see [AWS Cloud Development Kit - Bootstrapping](https://docs.aws.amazon.com/cdk/latest/guide/bootstrapping.html).
+
+### Install dependencies
+```bash
+npm install
+```
+
+### CDK Deployment
+Run the following to deploy the stacks of the cdk template:
+```bash
+cdk deploy
+```
+
 
 ### Accessing the Locust Dashboard
 To get started you first have to do the setup, as described [here](#setup). 
@@ -90,10 +111,30 @@ The default settings:
 
 If you want to achieve more load, checkout [Large scale load testing](#large-scale-load-testing) documentation.
 
+### Adopting the payload
+By default, this project generates random temperature sensor readings for every sensor with this format:
+```json
+ {
+    "sensorId": "bfbae19c-2f0f-41c2-952b-5d5bc6e001f1_1",
+    "temperature": 147.24,
+    "status": "OK",
+    "timestamp": 1675686126310
+ }
+```
+
+To adopt it to your needs, the project comes packaged with [Faker](https://faker.readthedocs.io/en/master/), that you can use to adopt the payload to your needs.
+If you want to use a different payload or payload format, please change it [here](load-test/locust-load-test.py#L61-L76).
+
 ### Configuration changes
 
 Locust is created on the EC2 instance as a [systemd](https://systemd.io/) service and can therefore be controlled with [systemctl](https://www.commandlinux.com/man-page/man1/systemctl.1.html). If you want to change the configuration of Locust on-the-fly without redeploying the stack, you can connect to the instance via [Systems Manager Session Manager (SSM)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/session-manager.html), navigate to the project directory on `/usr/local/load-test`, change the [locust.env](load-test/locust.env) file and restart the service by running `sudo systemctl restart locust`.
 
+### Destroy the stack
+In order to not incur any unnecessary costs, you can simply delete the stack.
+
+```bash
+cdk destroy
+```
 
 ## Large scale load testing
 In order to achieve peak performance with Locust and Kinesis, there are a couple of things to keep in mind.
@@ -152,35 +193,6 @@ load-test/                            -- Contains all the load testing scripts
 For simplicity of the setup and to reduce waiting times in the initial setup, the default VPC is used. If you want to create your custom VPC or reuse an already defined VPC, you can change it [here](infrastructure/kinesis-load-testing-with-locust.ts#L39-L42).
 
 The setup also requires, that the EC2 instance is accessible on port 8089 inside this VPC, so make sure an Internet Gateway is set up, and nothing restricts the port access (e.g. NACLs, ...).
-
-## Setup
-This project relies on [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html) and [TypeScript](https://www.typescriptlang.org/), for installation instructions look [here](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html#getting_started_install). 
-For further information you can also checkout [this Workshop](https://cdkworkshop.com/) and [this Getting Started](https://aws.amazon.com/getting-started/guides/setup-cdk/).
-
-### Bootstrap your environment
-```
-cdk bootstrap aws://ACCOUNT-NUMBER/REGION       # e.g. cdk bootstrap aws://123456789012/us-east-1
-```
-
-For more details, see [AWS Cloud Development Kit - Bootstrapping](https://docs.aws.amazon.com/cdk/latest/guide/bootstrapping.html).
-
-### Install dependencies
-```
-npm install
-```
-
-### CDK Deployment
-Run the following to deploy the stacks of the cdk template:
-```
-cdk deploy
-```
-
-### Destroy the stack
-In order to not incur any unnecessary costs, you can simply delete the stack.
-
-```
-cdk destroy
-```
 
 ## Notice
 This is a sample solution intended as a starting point and should not be used in a productive setting without thorough analysis and considerations on the user's side.
