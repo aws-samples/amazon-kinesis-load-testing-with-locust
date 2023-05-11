@@ -27,7 +27,6 @@ Easy [Amazon Kinesis](https://aws.amazon.com/kinesis/) load testing with [Locust
 - [Security](#security)
 - [License](#license)
 
-
 ## Overview
 
 For high-traffic Kinesis based application, it's often a challenge to simulate the necessary load in a load test. Locust is a powerful Python based framework to execute load test. This project leverages a [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) wrapper for Locust.
@@ -52,9 +51,7 @@ Navigate to the `load-test` directory and run:
 pip install -r requirements.txt
 ```
 
-In order to send events to Kinesis data stream from your local machine, you have to have AWS credentials, see also the documentation on Configuration and credential file settings.
-
-![Setup stream details local](img/Setup%20stream%20details%20local.png)
+In order to send events to Kinesis from your local machine, you have to have AWS credentials, see also the documentation on [Configuration and credential file settings](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
 
 To perform now the test locally, stay in the `load-test` directory and run:
 
@@ -64,6 +61,7 @@ locust -f locust-load-test.py
 
 You can now access the Locust dashboard via http://0.0.0.0:8089/. Enter the number of Locust users, the spawn rate (users added per second) and the target Amazon Kinesis data stream name as host.
 
+![Setup stream details local](img/Setup%20stream%20details%20local.png)
 
 
 In order to get the generated events logged out, run this command, it will filter only locust and root logs (e.g. no botocore logs):
