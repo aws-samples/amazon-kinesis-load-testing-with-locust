@@ -2,6 +2,9 @@
 
 source locust.env
 
+export REGION=$(curl --silent --retry 5 --retry-all-errors http://169.254.169.254/latest/meta-data/placement/region)
+echo "Locust runs in $REGION"
+
 if [ -z "$LOCUST_NUMBER_OF_SECONDARIES" ]; then
   echo "Please provide the number of secondaries to start";
   exit 1;
