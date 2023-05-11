@@ -1,5 +1,7 @@
 [Unit]
 Description=Kinesis load testing with Locust service
+Wants=network-online.target
+After=network-online.target
 
 [Service]
 User=ec2-user
