@@ -43,7 +43,7 @@ In our testing with the largest [recommended instance](#ec2-instance-type) - `c7
 Alternatively your can use the [Amazon Kinesis Data Generator](https://github.com/awslabs/amazon-kinesis-data-generator), which provides you with a hosted UI to set up Kinesis load tests. As this approach is browser based, you are limited by the bandwidth of your current connection, the round trip latency and have to keep the browser tab open to continue sending events.
 
 ## Test locally
-To test Locust out locally first, before deploying it to the cloud, you have to install the necessary dependencies.
+To test Locust out locally first, before [deploying it to the cloud](#cloud-setup), you have to install the necessary dependencies.
 
 Navigate to the `load-test` directory and run:
 
