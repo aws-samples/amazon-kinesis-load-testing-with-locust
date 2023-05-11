@@ -451,7 +451,7 @@ Object {
                 "cwd": "/usr/local/load-test",
               },
               "003": Object {
-                "command": "PATH=/usr/local/bin:$PATH && REGION=eu-central-1",
+                "command": "PATH=/usr/local/bin:$PATH",
               },
             },
             "packages": Object {
@@ -463,9 +463,6 @@ Object {
             "services": Object {
               "sysvinit": Object {
                 "locust": Object {
-                  "commands": Array [
-                    "003",
-                  ],
                   "enabled": true,
                   "ensureRunning": true,
                 },
@@ -523,14 +520,14 @@ aws s3 cp 's3://",
                 Object {
                   "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-central-1",
                 },
-                "/acebd54c7a66b31ee4e5f5eb30938c759f09a16b1228291b2e7a3d45f96aa6eb.zip' '/usr/local/load-test/load-test-assets.zip'
+                "/aad5ac5c8acc37b3da209eacd7be2d2c92adc0b161954587011f55d57def6632.zip' '/usr/local/load-test/load-test-assets.zip'
 mkdir -p $(dirname '/etc/systemd/system/locust.service')
 aws s3 cp 's3://",
                 Object {
                   "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-central-1",
                 },
-                "/608ff74aea79c251ff661d527c78b229f4f7928a4e8b7e3a7c9810f62c4c7863.service' '/etc/systemd/system/locust.service'
-# fingerprint: 123ae2d4c1e74084
+                "/d5775109e5610c2612d93bbc93448f09f5c2046c3185bb679e810726c4cb98c9.service' '/etc/systemd/system/locust.service'
+# fingerprint: 0c86fbeaae204c31
 (
   set +e
   /opt/aws/bin/cfn-init -v --region ",

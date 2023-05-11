@@ -1,7 +1,6 @@
 import * as cdk from "aws-cdk-lib";
 import {
   AmazonLinuxCpuType,
-  AmazonLinuxGeneration,
   CloudFormationInit,
   InitCommand,
   InitPackage,
@@ -80,17 +79,14 @@ export class KinesisLoadTestingWithLocustStack extends cdk.Stack {
       localFile: `${SYSTEMD_SERIVCE_PATH}/${LOCUST_SERIVCE_NAME}`,
     });
 
-    const locustServiceHandle = new InitServiceRestartHandle();
     const initData = CloudFormationInit.fromElements(
       InitPackage.yum("gcc"),
       InitPackage.yum("python3-devel"),
       InitCommand.shellCommand(`unzip ${LOAD_TEST_ASSET_FILE_NAME}`, { cwd: LOAD_TEST_FILE_PATH }),
       InitCommand.shellCommand("pip3 install --upgrade pip"),
       InitCommand.shellCommand("pip3 install -r requirements.txt", { cwd: LOAD_TEST_FILE_PATH }),
-      InitCommand.shellCommand(`PATH=/usr/local/bin:$PATH && REGION=${props?.env?.region}`, {
-        serviceRestartHandles: [locustServiceHandle],
-      }),
-      InitService.enable("locust", { serviceRestartHandle: locustServiceHandle })
+      InitCommand.shellCommand(`PATH=/usr/local/bin:$PATH`),
+      InitService.enable("locust")
     );
 
     // Finally lets provision our ec2 instance
