@@ -7,12 +7,15 @@ Easy [Amazon Kinesis](https://aws.amazon.com/kinesis/) load testing with [Locust
 ## Table of contents
 
 - [Overview](#overview)
-- [Getting started](#getting-started)
-   - [Test locally](#test-locally)
-   - [Cloud deployment](#)
+- [Test locally](#test-locally)
+- [Cloud setup](#cloud-setup)
+   - [Bootstrap your environment](#bootstrap-your-environment)
+   - [Install dependencies](#install-dependencies)
+   - [CDK Deployment](#cdk-deployment)
    - [Accessing the Locust Dashboard](#accessing-the-locust-dashboard)
    - [Adopting the payload](#adopting-the-payload)
    - [Configuration changes](#configuration-changes)
+   - [Destroy the stack](#destroy-the-stack)
 - [Large scale load testing](#large-scale-load-testing)
    - [Instance size](#instance-size)
    - [Number of secondaries](#number-of-secondaries)
@@ -20,14 +23,10 @@ Easy [Amazon Kinesis](https://aws.amazon.com/kinesis/) load testing with [Locust
    - [EC2 instance type](#ec2-instance-type)
 - [Project structure](#project-structure)
 - [Remarks](#remarks)
-- [Setup](#setup)
-   - [Bootstrap your environment](#bootstrap-your-environment)
-   - [Install dependencies](#install-dependencies)
-   - [CDK Deployment](#cdk-deployment)
-   - [Destroy the stack](#destroy-the-stack)
 - [Notice](#notice)
 - [Security](#security)
 - [License](#license)
+
 
 ## Overview
 
