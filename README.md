@@ -140,7 +140,7 @@ cdk destroy
 In order to achieve peak performance with Locust and Kinesis, there are a couple of things to keep in mind.
 
 ### Instance size
-Your performance is bound by the underlying EC2 instance, so check [recommended instance](#ec2-instance-type) for more information about scaling. In order to set the correct instance size, you can configure the instanze size [here](infrastructure/kinesis-load-testing-with-locust.ts#L28).
+Your performance is bound by the underlying EC2 instance, so check [recommended instance](#ec2-instance-type) for more information about scaling. In order to set the correct instance size, you can configure the instanze size [here](infrastructure/kinesis-load-testing-with-locust.ts#L27).
 
 ### Number of secondaries
 Locust benefits from a distributed setup. Therefore the setup spins up multiple secondaries, that do the actual work, and a primary, that does the coordination. In order to leverage the cores up to maximum, you should specify 1 secondary per core, you can configure the number [here](load-test/locust.env#L1).
