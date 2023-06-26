@@ -2,6 +2,28 @@
 
 exports[`KinesisLoadTestingWithLocustStack Snapshot test 1`] = `
 Object {
+  "Conditions": Object {
+    "AwsCdkKinesisEncryptedStreamsUnsupportedRegions": Object {
+      "Fn::Or": Array [
+        Object {
+          "Fn::Equals": Array [
+            Object {
+              "Ref": "AWS::Region",
+            },
+            "cn-north-1",
+          ],
+        },
+        Object {
+          "Fn::Equals": Array [
+            Object {
+              "Ref": "AWS::Region",
+            },
+            "cn-northwest-1",
+          ],
+        },
+      ],
+    },
+  },
   "Outputs": Object {
     "locustdashboardurl": Object {
       "Value": Object {
@@ -33,6 +55,28 @@ Object {
     },
   },
   "Resources": Object {
+    "DemoStream7DBE9115": Object {
+      "Properties": Object {
+        "Name": "DemoStream",
+        "RetentionPeriodHours": 24,
+        "StreamEncryption": Object {
+          "Fn::If": Array [
+            "AwsCdkKinesisEncryptedStreamsUnsupportedRegions",
+            Object {
+              "Ref": "AWS::NoValue",
+            },
+            Object {
+              "EncryptionType": "KMS",
+              "KeyId": "alias/aws/kinesis",
+            },
+          ],
+        },
+        "StreamModeDetails": Object {
+          "StreamMode": "ON_DEMAND",
+        },
+      },
+      "Type": "AWS::Kinesis::Stream",
+    },
     "VPCB9E5F0B4": Object {
       "Properties": Object {
         "CidrBlock": "10.0.0.0/16",

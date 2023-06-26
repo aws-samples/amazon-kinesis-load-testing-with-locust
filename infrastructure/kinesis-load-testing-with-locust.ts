@@ -19,6 +19,7 @@ import {
   Vpc,
 } from "aws-cdk-lib/aws-ec2";
 import { ManagedPolicy, Role, ServicePrincipal } from "aws-cdk-lib/aws-iam";
+import * as kinesis from "aws-cdk-lib/aws-kinesis";
 import { Asset } from "aws-cdk-lib/aws-s3-assets";
 import { Construct } from "constructs";
 import path = require("path");
@@ -58,6 +59,11 @@ export class KinesisLoadTestingWithLocustStack extends cdk.Stack {
       Port.tcp(LOCUST_DEFAULT_PORT),
       "Allows Locust Dashboard access from Internet"
     );
+
+    const demoStream = new kinesis.Stream(this, "DemoStream", {
+      streamName: "DemoStream",
+      streamMode: kinesis.StreamMode.ON_DEMAND,
+    });
 
     const locustLoadTestDirectory = new Asset(this, "LocustLoadTestDirectory", {
       path: path.join(__dirname, "..", "load-test"),

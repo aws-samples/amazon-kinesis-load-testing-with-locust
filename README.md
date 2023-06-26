@@ -33,7 +33,7 @@ For high-traffic Kinesis based application, it's often a challenge to simulate t
 
 ![Dashboard Overview](img/Dashboard%20overview.png)
 
-This project emits temperature sensor readings via Locust to Kinesis. The EC2 Locust instance is setup via CDK to load test Kinesis based applications. Users can connect via [Systems Manager Session Manager (SSM)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/session-manager.html) for [configuration changes](#configuration-changes).
+This project emits temperature sensor readings via Locust to Kinesis. The EC2 Locust instance is setup via CDK to load test Kinesis based applications. Users can connect via [Systems Manager Session Manager (SSM)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/session-manager.html) for [configuration changes](#configuration-changes). For your convenience, it deploys a Kinesis Data Stream called `DemoStream` as well, to get you started. If you want to adapt or disable it, you can find the resource [here](infrastructure/kinesis-load-testing-with-locust.ts#L63-L66).
 
 ![Architecture Overview](img/Architecture%20Overview.png)
 
@@ -140,7 +140,7 @@ cdk destroy
 In order to achieve peak performance with Locust and Kinesis, there are a couple of things to keep in mind.
 
 ### Instance size
-Your performance is bound by the underlying EC2 instance, so check [recommended instance](#ec2-instance-type) for more information about scaling. In order to set the correct instance size, you can configure the instanze size [here](infrastructure/kinesis-load-testing-with-locust.ts#L27).
+Your performance is bound by the underlying EC2 instance, so check [recommended instance](#ec2-instance-type) for more information about scaling. In order to set the correct instance size, you can configure the instanze size [here](infrastructure/kinesis-load-testing-with-locust.ts#L28).
 
 ### Number of secondaries
 Locust benefits from a distributed setup. Therefore the setup spins up multiple secondaries, that do the actual work, and a primary, that does the coordination. In order to leverage the cores up to maximum, you should specify 1 secondary per core, you can configure the number [here](load-test/locust.env#L1).
