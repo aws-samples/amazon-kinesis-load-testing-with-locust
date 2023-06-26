@@ -25,7 +25,7 @@ import { Construct } from "constructs";
 import path = require("path");
 
 const LOCUST_DEFAULT_PORT = 8089;
-const LOCUST_INSTANCE_SIZE = InstanceSize.XLARGE;
+const LOCUST_INSTANCE_SIZE = InstanceSize.XLARGE8;
 
 const LOAD_TEST_FILE_PATH = "/usr/local/load-test";
 const LOAD_TEST_ASSET_FILE_NAME = "load-test-assets.zip";
@@ -47,6 +47,7 @@ export class KinesisLoadTestingWithLocustStack extends cdk.Stack {
     });
     role.addManagedPolicy(ManagedPolicy.fromAwsManagedPolicyName("AmazonSSMManagedInstanceCore"));
     role.addManagedPolicy(ManagedPolicy.fromAwsManagedPolicyName("AmazonKinesisFullAccess"));
+    role.addManagedPolicy(ManagedPolicy.fromAwsManagedPolicyName("AmazonSQSFullAccess"));
 
     // Set up security group to access the locust dashboard. As the dashboard
     const securityGroup = new SecurityGroup(this, "kinesis-load-testing-with-locust-sg", {
