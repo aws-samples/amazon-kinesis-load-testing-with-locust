@@ -564,7 +564,7 @@ aws s3 cp 's3://",
                 Object {
                   "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-central-1",
                 },
-                "/aad5ac5c8acc37b3da209eacd7be2d2c92adc0b161954587011f55d57def6632.zip' '/usr/local/load-test/load-test-assets.zip'
+                "/2e1665d2bf9c57a5724ff1c911821aebe5cc0615554ac5fa46fda01a05e828b8.zip' '/usr/local/load-test/load-test-assets.zip'
 mkdir -p $(dirname '/etc/systemd/system/locust.service')
 aws s3 cp 's3://",
                 Object {
