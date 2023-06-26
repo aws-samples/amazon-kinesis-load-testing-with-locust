@@ -33,7 +33,7 @@ For high-traffic Kinesis based application, it's often a challenge to simulate t
 
 ![Dashboard Overview](img/Dashboard%20overview.png)
 
-This project emits temperature sensor readings via Locust to Kinesis. The EC2 Locust instance is setup via CDK to load test Kinesis based applications. Users can connect via [Systems Manager Session Manager (SSM)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/session-manager.html) for [configuration changes](#configuration-changes).
+This project emits temperature sensor readings via Locust to Kinesis. The EC2 Locust instance is setup via CDK to load test Kinesis based applications. Users can connect via [Systems Manager Session Manager (SSM)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/session-manager.html) for [configuration changes](#configuration-changes). For your convenience, it deploys a Kinesis Data Stream called `DemoStream` as well, to get you started. If you want to adapt or disable it, you can find the resource [here](infrastructure/kinesis-load-testing-with-locust.ts#L63-L66).
 
 ![Architecture Overview](img/Architecture%20Overview.png)
 
