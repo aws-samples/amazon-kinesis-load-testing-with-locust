@@ -39,7 +39,16 @@ export class KinesisLoadTestingWithLocustStack extends cdk.Stack {
     // Get the default VPC. This is the network where your instance will be provisioned
     // All activated regions in AWS have a default vpc.
     // You can create your own of course as well. https://aws.amazon.com/vpc/
-    const defaultVpc = Vpc.fromLookup(this, "VPC", { isDefault: true });
+    const loadTestingVpc = new Vpc(this, "Load testing VPC", {
+      natGateways: 0,
+      maxAzs: 1,
+      subnetConfiguration: [
+        {
+          name: 'PublicSubnet',
+          subnetType: SubnetType.PUBLIC,
+        },
+      ],
+    })
 
     // Create the role with EC2 and add permissions to connect via SSM and full access to Kinesis in order to send events
     const role = new Role(this, "kinesis-locust-load-test-ec2-role", {
@@ -50,7 +59,7 @@ export class KinesisLoadTestingWithLocustStack extends cdk.Stack {
 
     // Set up security group to access the locust dashboard. As the dashboard
     const securityGroup = new SecurityGroup(this, "kinesis-load-testing-with-locust-sg", {
-      vpc: defaultVpc,
+      vpc: loadTestingVpc,
       allowAllOutbound: true,
       securityGroupName: "kinesis-load-testing-with-locust-sg",
     });
@@ -97,7 +106,7 @@ export class KinesisLoadTestingWithLocustStack extends cdk.Stack {
 
     // Finally lets provision our ec2 instance
     const locustLoadTestingInstance = new Instance(this, "kinesis-load-testing-with-locust-instance", {
-      vpc: defaultVpc,
+      vpc: loadTestingVpc,
       role: role,
       securityGroup: securityGroup,
       instanceName: "kinesis-load-testing-with-locust-instance",
