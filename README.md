@@ -75,7 +75,7 @@ For further information you can also checkout [this Workshop](https://cdkworksho
 
 ### Bootstrap your environment
 ```bash
-cdk bootstrap aws://ACCOUNT-NUMBER/REGION       # e.g. cdk bootstrap aws://123456789012/us-east-1
+cdk bootstrap
 ```
 
 For more details, see [AWS Cloud Development Kit - Bootstrapping](https://docs.aws.amazon.com/cdk/latest/guide/bootstrapping.html).
