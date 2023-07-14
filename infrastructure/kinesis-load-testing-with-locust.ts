@@ -5,7 +5,6 @@ import {
   InitCommand,
   InitPackage,
   InitService,
-  InitServiceRestartHandle,
   Instance,
   InstanceClass,
   InstanceSize,
