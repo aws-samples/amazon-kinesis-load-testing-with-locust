@@ -56,6 +56,7 @@ Object {
   },
   "Resources": Object {
     "DemoStream7DBE9115": Object {
+      "DeletionPolicy": "Delete",
       "Properties": Object {
         "Name": "DemoStream",
         "RetentionPeriodHours": 24,
@@ -76,6 +77,7 @@ Object {
         },
       },
       "Type": "AWS::Kinesis::Stream",
+      "UpdateReplacePolicy": "Delete",
     },
     "LoadtestingVPC470E256F": Object {
       "Properties": Object {
