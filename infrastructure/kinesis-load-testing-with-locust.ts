@@ -71,6 +71,8 @@ export class KinesisLoadTestingWithLocustStack extends cdk.Stack {
     const demoStream = new kinesis.Stream(this, "DemoStream", {
       streamName: "DemoStream",
       streamMode: kinesis.StreamMode.ON_DEMAND,
+
+      removalPolicy: cdk.RemovalPolicy.DESTROY, // Remove to clean up the environment
     });
 
     const locustLoadTestDirectory = new Asset(this, "LocustLoadTestDirectory", {
