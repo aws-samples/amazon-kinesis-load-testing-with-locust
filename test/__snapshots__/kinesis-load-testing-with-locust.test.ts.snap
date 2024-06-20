@@ -1,21 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`KinesisLoadTestingWithLocustStack Snapshot test 1`] = `
-Object {
-  "Conditions": Object {
-    "AwsCdkKinesisEncryptedStreamsUnsupportedRegions": Object {
-      "Fn::Or": Array [
-        Object {
-          "Fn::Equals": Array [
-            Object {
+{
+  "Conditions": {
+    "AwsCdkKinesisEncryptedStreamsUnsupportedRegions": {
+      "Fn::Or": [
+        {
+          "Fn::Equals": [
+            {
               "Ref": "AWS::Region",
             },
             "cn-north-1",
           ],
         },
-        Object {
-          "Fn::Equals": Array [
-            Object {
+        {
+          "Fn::Equals": [
+            {
               "Ref": "AWS::Region",
             },
             "cn-northwest-1",
@@ -24,15 +24,15 @@ Object {
       ],
     },
   },
-  "Outputs": Object {
-    "locustdashboardurl": Object {
-      "Value": Object {
-        "Fn::Join": Array [
+  "Outputs": {
+    "locustdashboardurl": {
+      "Value": {
+        "Fn::Join": [
           "",
-          Array [
+          [
             "http://",
-            Object {
-              "Fn::GetAtt": Array [
+            {
+              "Fn::GetAtt": [
                 "kinesisloadtestingwithlocustinstance56EDDEC9",
                 "PublicIp",
               ],
@@ -43,50 +43,50 @@ Object {
       },
     },
   },
-  "Parameters": Object {
-    "BootstrapVersion": Object {
+  "Parameters": {
+    "BootstrapVersion": {
       "Default": "/cdk-bootstrap/hnb659fds/version",
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amikernel510hvmarm64gp2C96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+    "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amikernel510hvmarm64gp2C96584B6F00A464EAD1953AFF4B05118Parameter": {
       "Default": "/aws/service/ami-amazon-linux-latest/amzn2-ami-kernel-5.10-hvm-arm64-gp2",
       "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
     },
   },
-  "Resources": Object {
-    "DemoStream7DBE9115": Object {
+  "Resources": {
+    "DemoStream7DBE9115": {
       "DeletionPolicy": "Delete",
-      "Properties": Object {
+      "Properties": {
         "Name": "DemoStream",
         "RetentionPeriodHours": 24,
-        "StreamEncryption": Object {
-          "Fn::If": Array [
+        "StreamEncryption": {
+          "Fn::If": [
             "AwsCdkKinesisEncryptedStreamsUnsupportedRegions",
-            Object {
+            {
               "Ref": "AWS::NoValue",
             },
-            Object {
+            {
               "EncryptionType": "KMS",
               "KeyId": "alias/aws/kinesis",
             },
           ],
         },
-        "StreamModeDetails": Object {
+        "StreamModeDetails": {
           "StreamMode": "ON_DEMAND",
         },
       },
       "Type": "AWS::Kinesis::Stream",
       "UpdateReplacePolicy": "Delete",
     },
-    "LoadtestingVPC470E256F": Object {
-      "Properties": Object {
+    "LoadtestingVPC470E256F": {
+      "Properties": {
         "CidrBlock": "10.0.0.0/16",
         "EnableDnsHostnames": true,
         "EnableDnsSupport": true,
         "InstanceTenancy": "default",
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "KinesisLoadTestingWithLocustStack/Load testing VPC",
           },
@@ -94,10 +94,10 @@ Object {
       },
       "Type": "AWS::EC2::VPC",
     },
-    "LoadtestingVPCIGW333C72B1": Object {
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+    "LoadtestingVPCIGW333C72B1": {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "KinesisLoadTestingWithLocustStack/Load testing VPC",
           },
@@ -105,189 +105,189 @@ Object {
       },
       "Type": "AWS::EC2::InternetGateway",
     },
-    "LoadtestingVPCPublicSubnetSubnet1DefaultRoute60072BA0": Object {
-      "DependsOn": Array [
+    "LoadtestingVPCPublicSubnetSubnet1DefaultRoute60072BA0": {
+      "DependsOn": [
         "LoadtestingVPCVPCGWE9D04917",
       ],
-      "Properties": Object {
+      "Properties": {
         "DestinationCidrBlock": "0.0.0.0/0",
-        "GatewayId": Object {
+        "GatewayId": {
           "Ref": "LoadtestingVPCIGW333C72B1",
         },
-        "RouteTableId": Object {
+        "RouteTableId": {
           "Ref": "LoadtestingVPCPublicSubnetSubnet1RouteTable5C7991F4",
         },
       },
       "Type": "AWS::EC2::Route",
     },
-    "LoadtestingVPCPublicSubnetSubnet1RouteTable5C7991F4": Object {
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+    "LoadtestingVPCPublicSubnetSubnet1RouteTable5C7991F4": {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "KinesisLoadTestingWithLocustStack/Load testing VPC/PublicSubnetSubnet1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "LoadtestingVPC470E256F",
         },
       },
       "Type": "AWS::EC2::RouteTable",
     },
-    "LoadtestingVPCPublicSubnetSubnet1RouteTableAssociation828D98D2": Object {
-      "Properties": Object {
-        "RouteTableId": Object {
+    "LoadtestingVPCPublicSubnetSubnet1RouteTableAssociation828D98D2": {
+      "Properties": {
+        "RouteTableId": {
           "Ref": "LoadtestingVPCPublicSubnetSubnet1RouteTable5C7991F4",
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "LoadtestingVPCPublicSubnetSubnet1SubnetE102A8F4",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
     },
-    "LoadtestingVPCPublicSubnetSubnet1SubnetE102A8F4": Object {
-      "Properties": Object {
-        "AvailabilityZone": Object {
-          "Fn::Select": Array [
+    "LoadtestingVPCPublicSubnetSubnet1SubnetE102A8F4": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
             0,
-            Object {
+            {
               "Fn::GetAZs": "",
             },
           ],
         },
         "CidrBlock": "10.0.0.0/16",
         "MapPublicIpOnLaunch": true,
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "aws-cdk:subnet-name",
             "Value": "PublicSubnet",
           },
-          Object {
+          {
             "Key": "aws-cdk:subnet-type",
             "Value": "Public",
           },
-          Object {
+          {
             "Key": "Name",
             "Value": "KinesisLoadTestingWithLocustStack/Load testing VPC/PublicSubnetSubnet1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "LoadtestingVPC470E256F",
         },
       },
       "Type": "AWS::EC2::Subnet",
     },
-    "LoadtestingVPCVPCGWE9D04917": Object {
-      "Properties": Object {
-        "InternetGatewayId": Object {
+    "LoadtestingVPCVPCGWE9D04917": {
+      "Properties": {
+        "InternetGatewayId": {
           "Ref": "LoadtestingVPCIGW333C72B1",
         },
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "LoadtestingVPC470E256F",
         },
       },
       "Type": "AWS::EC2::VPCGatewayAttachment",
     },
-    "kinesisloadtestingwithlocustinstance56EDDEC9": Object {
-      "CreationPolicy": Object {
-        "ResourceSignal": Object {
+    "kinesisloadtestingwithlocustinstance56EDDEC9": {
+      "CreationPolicy": {
+        "ResourceSignal": {
           "Count": 1,
           "Timeout": "PT5M",
         },
       },
-      "DependsOn": Array [
+      "DependsOn": [
         "kinesislocustloadtestec2roleDefaultPolicyC60D7B98",
         "kinesislocustloadtestec2role2E226CA6",
       ],
-      "Metadata": Object {
-        "AWS::CloudFormation::Init": Object {
-          "config": Object {
-            "commands": Object {
-              "000": Object {
+      "Metadata": {
+        "AWS::CloudFormation::Init": {
+          "config": {
+            "commands": {
+              "000": {
                 "command": "unzip load-test-assets.zip",
                 "cwd": "/usr/local/load-test",
               },
-              "001": Object {
+              "001": {
                 "command": "pip3 install --upgrade pip",
               },
-              "002": Object {
+              "002": {
                 "command": "pip3 install -r requirements.txt",
                 "cwd": "/usr/local/load-test",
               },
-              "003": Object {
+              "003": {
                 "command": "PATH=/usr/local/bin:$PATH",
               },
             },
-            "packages": Object {
-              "yum": Object {
-                "gcc": Array [],
-                "python3-devel": Array [],
+            "packages": {
+              "yum": {
+                "gcc": [],
+                "python3-devel": [],
               },
             },
-            "services": Object {
-              "sysvinit": Object {
-                "locust": Object {
+            "services": {
+              "sysvinit": {
+                "locust": {
                   "enabled": true,
                   "ensureRunning": true,
                 },
               },
             },
           },
-          "configSets": Object {
-            "default": Array [
+          "configSets": {
+            "default": [
               "config",
             ],
           },
         },
       },
-      "Properties": Object {
-        "AvailabilityZone": Object {
-          "Fn::Select": Array [
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
             0,
-            Object {
+            {
               "Fn::GetAZs": "",
             },
           ],
         },
-        "IamInstanceProfile": Object {
+        "IamInstanceProfile": {
           "Ref": "kinesisloadtestingwithlocustinstanceInstanceProfileE095B9C3",
         },
-        "ImageId": Object {
+        "ImageId": {
           "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amikernel510hvmarm64gp2C96584B6F00A464EAD1953AFF4B05118Parameter",
         },
         "InstanceType": "c7g.xlarge",
-        "SecurityGroupIds": Array [
-          Object {
-            "Fn::GetAtt": Array [
+        "SecurityGroupIds": [
+          {
+            "Fn::GetAtt": [
               "kinesisloadtestingwithlocustsg0D3CD02E",
               "GroupId",
             ],
           },
         ],
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "LoadtestingVPCPublicSubnetSubnet1SubnetE102A8F4",
         },
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "kinesis-load-testing-with-locust-instance",
           },
         ],
-        "UserData": Object {
-          "Fn::Base64": Object {
-            "Fn::Join": Array [
+        "UserData": {
+          "Fn::Base64": {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "#!/bin/bash
 mkdir -p $(dirname '/usr/local/load-test/load-test-assets.zip')
 aws s3 cp 's3://",
-                Object {
+                {
                   "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-central-1",
                 },
                 "/2e1665d2bf9c57a5724ff1c911821aebe5cc0615554ac5fa46fda01a05e828b8.zip' '/usr/local/load-test/load-test-assets.zip'
 mkdir -p $(dirname '/etc/systemd/system/locust.service')
 aws s3 cp 's3://",
-                Object {
+                {
                   "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-central-1",
                 },
                 "/d5775109e5610c2612d93bbc93448f09f5c2046c3185bb679e810726c4cb98c9.service' '/etc/systemd/system/locust.service'
@@ -295,20 +295,20 @@ aws s3 cp 's3://",
 (
   set +e
   /opt/aws/bin/cfn-init -v --region ",
-                Object {
+                {
                   "Ref": "AWS::Region",
                 },
                 " --stack ",
-                Object {
+                {
                   "Ref": "AWS::StackName",
                 },
                 " --resource kinesisloadtestingwithlocustinstance56EDDEC9 -c default
   /opt/aws/bin/cfn-signal -e $? --region ",
-                Object {
+                {
                   "Ref": "AWS::Region",
                 },
                 " --stack ",
-                Object {
+                {
                   "Ref": "AWS::StackName",
                 },
                 " --resource kinesisloadtestingwithlocustinstance56EDDEC9
@@ -321,29 +321,29 @@ aws s3 cp 's3://",
       },
       "Type": "AWS::EC2::Instance",
     },
-    "kinesisloadtestingwithlocustinstanceInstanceProfileE095B9C3": Object {
-      "Properties": Object {
-        "Roles": Array [
-          Object {
+    "kinesisloadtestingwithlocustinstanceInstanceProfileE095B9C3": {
+      "Properties": {
+        "Roles": [
+          {
             "Ref": "kinesislocustloadtestec2role2E226CA6",
           },
         ],
       },
       "Type": "AWS::IAM::InstanceProfile",
     },
-    "kinesisloadtestingwithlocustsg0D3CD02E": Object {
-      "Properties": Object {
+    "kinesisloadtestingwithlocustsg0D3CD02E": {
+      "Properties": {
         "GroupDescription": "KinesisLoadTestingWithLocustStack/kinesis-load-testing-with-locust-sg",
         "GroupName": "kinesis-load-testing-with-locust-sg",
-        "SecurityGroupEgress": Array [
-          Object {
+        "SecurityGroupEgress": [
+          {
             "CidrIp": "0.0.0.0/0",
             "Description": "Allow all outbound traffic by default",
             "IpProtocol": "-1",
           },
         ],
-        "SecurityGroupIngress": Array [
-          Object {
+        "SecurityGroupIngress": [
+          {
             "CidrIp": "0.0.0.0/0",
             "Description": "Allows Locust Dashboard access from Internet",
             "FromPort": 8089,
@@ -351,45 +351,45 @@ aws s3 cp 's3://",
             "ToPort": 8089,
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "LoadtestingVPC470E256F",
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "kinesislocustloadtestec2role2E226CA6": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "kinesislocustloadtestec2role2E226CA6": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "ec2.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/AmazonSSMManagedInstanceCore",
               ],
             ],
           },
-          Object {
-            "Fn::Join": Array [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/AmazonKinesisFullAccess",
@@ -400,43 +400,43 @@ aws s3 cp 's3://",
       },
       "Type": "AWS::IAM::Role",
     },
-    "kinesislocustloadtestec2roleDefaultPolicyC60D7B98": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "kinesislocustloadtestec2roleDefaultPolicyC60D7B98": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "s3:GetObject*",
                 "s3:GetBucket*",
                 "s3:List*",
               ],
               "Effect": "Allow",
-              "Resource": Array [
-                Object {
-                  "Fn::Join": Array [
+              "Resource": [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":s3:::",
-                      Object {
+                      {
                         "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-central-1",
                       },
                     ],
                   ],
                 },
-                Object {
-                  "Fn::Join": Array [
+                {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":s3:::",
-                      Object {
+                      {
                         "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-central-1",
                       },
                       "/*",
@@ -445,13 +445,13 @@ aws s3 cp 's3://",
                 },
               ],
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "cloudformation:DescribeStackResource",
                 "cloudformation:SignalResource",
               ],
               "Effect": "Allow",
-              "Resource": Object {
+              "Resource": {
                 "Ref": "AWS::StackId",
               },
             },
@@ -459,8 +459,8 @@ aws s3 cp 's3://",
           "Version": "2012-10-17",
         },
         "PolicyName": "kinesislocustloadtestec2roleDefaultPolicyC60D7B98",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "kinesislocustloadtestec2role2E226CA6",
           },
         ],
@@ -468,22 +468,22 @@ aws s3 cp 's3://",
       "Type": "AWS::IAM::Policy",
     },
   },
-  "Rules": Object {
-    "CheckBootstrapVersion": Object {
-      "Assertions": Array [
-        Object {
-          "Assert": Object {
-            "Fn::Not": Array [
-              Object {
-                "Fn::Contains": Array [
-                  Array [
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
                     "1",
                     "2",
                     "3",
                     "4",
                     "5",
                   ],
-                  Object {
+                  {
                     "Ref": "BootstrapVersion",
                   },
                 ],
