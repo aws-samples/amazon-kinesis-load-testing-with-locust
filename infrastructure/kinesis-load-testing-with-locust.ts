@@ -111,7 +111,7 @@ export class KinesisLoadTestingWithLocustStack extends cdk.Stack {
       role: role,
       securityGroup: securityGroup,
       instanceName: "kinesis-load-testing-with-locust-instance",
-      instanceType: InstanceType.of(InstanceClass.C7G, LOCUST_INSTANCE_SIZE),
+      instanceType: InstanceType.of(InstanceClass.COMPUTE7_GRAVITON3, LOCUST_INSTANCE_SIZE),
       machineImage: MachineImage.latestAmazonLinux2({
         cpuType: AmazonLinuxCpuType.ARM_64,
       }),
