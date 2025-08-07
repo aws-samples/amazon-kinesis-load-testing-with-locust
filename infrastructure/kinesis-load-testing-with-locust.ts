@@ -118,6 +118,7 @@ export class KinesisLoadTestingWithLocustStack extends cdk.Stack {
       vpcSubnets: { subnetType: SubnetType.PUBLIC },
       userData: userData,
       init: initData,
+      detailedMonitoring: true, // Optional, enables detailed monitoring
     });
 
     new cdk.CfnOutput(this, "locust-dashboard-url", {
