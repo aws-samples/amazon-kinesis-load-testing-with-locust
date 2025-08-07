@@ -326,7 +326,7 @@ export class KinesisLoadTestingWithLocustStack extends cdk.Stack {
             "height": 4,
             "properties": {
               "metrics": [
-                [{ "expression": `${SHARD_LIMIT} * 1 * IF(m5, 1, 1)`, "label": "Incoming data Limit", "id": "e6", "color": "#d62728", "region": `${this.region}`, "period": 60 }],
+                [{ "expression": `200 * 1 * IF(m5, 1, 1)`, "label": "Incoming data Limit", "id": "e6", "color": "#d62728", "region": `${this.region}`, "period": 60 }],
                 [{ "expression": "m5/1024/1024/PERIOD(m5)", "id": "e1", "label": "Incoming data - sum (MB/s)", "region": `${this.region}`, "period": 60 }],
                 ["AWS/Kinesis", "IncomingBytes", "StreamName", "${StreamName}", { "id": "m5", "visible": false, "stat": "Sum" }]
               ],
@@ -352,7 +352,7 @@ export class KinesisLoadTestingWithLocustStack extends cdk.Stack {
             "height": 4,
             "properties": {
               "metrics": [
-                [{ "expression": `${SHARD_LIMIT} *\n              1000 * PERIOD(m6) * IF(m6, 1, 1)`, "label": "Incoming records Limit", "id": "e6", "color": "#d62728", "period": 60, "region": `${this.region}` }],
+                [{ "expression": `200 *\n              1000 * PERIOD(m6) * IF(m6, 1, 1)`, "label": "Incoming records Limit", "id": "e6", "color": "#d62728", "period": 60, "region": `${this.region}` }],
                 ["AWS/Kinesis", "IncomingRecords", "StreamName", "${StreamName}", { "id": "m6", "visible": true }]
               ],
               "region": `${this.region}`,
