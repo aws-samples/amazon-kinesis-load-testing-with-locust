@@ -40,7 +40,7 @@ export class KinesisLoadTestingWithLocustStack extends cdk.Stack {
     // You can create your own of course as well. https://aws.amazon.com/vpc/
     const loadTestingVpc = new Vpc(this, "Load testing VPC", {
       natGateways: 0,
-      maxAzs: 1,
+      maxAzs: 3,
       subnetConfiguration: [
         {
           name: 'PublicSubnet',
