@@ -107,7 +107,7 @@ The default settings:
 * Instance: `c7g.xlarge`
 * Number of secondaries: `4`
 * Batch size: `10`
-* Host (Kinesis stream name): `kinesis-load-test-input-stream`, you can change the default host [here](load-test/locust.env#L3)
+* Host (Kinesis stream name): `kinesis-load-test-input-stream`, you can change the default host [here](load-test/locust.env#L4)
 
 If you want to achieve more load, checkout [Large scale load testing](#large-scale-load-testing) documentation.
 

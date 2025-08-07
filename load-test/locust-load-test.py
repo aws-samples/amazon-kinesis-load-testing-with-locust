@@ -9,7 +9,9 @@ from locust import User, task, constant, events
 from faker import Faker
 
 REGION = os.environ.get("REGION") if os.environ.get("REGION") else "eu-central-1"
-BATCH_SIZE = int(os.environ.get("LOCUST_BATCH_SIZE")) if os.environ.get("LOCUST_BATCH_SIZE") else 1
+
+MAX_BATCH_SIZE = 500 # Maximum Kinesis put_records API limit
+BATCH_SIZE = min(int(os.environ.get("LOCUST_BATCH_SIZE")), MAX_BATCH_SIZE) if os.environ.get("LOCUST_BATCH_SIZE") else 1
 
 faker = Faker()
 

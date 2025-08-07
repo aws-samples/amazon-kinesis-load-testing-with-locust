@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`KinesisLoadTestingWithLocustStack Snapshot test 1`] = `
 {
@@ -25,6 +25,10 @@ exports[`KinesisLoadTestingWithLocustStack Snapshot test 1`] = `
     },
   },
   "Outputs": {
+    "DashboardUrl": {
+      "Description": "URL for the CloudWatch Dashboard",
+      "Value": "https://eu-central-1.console.aws.amazon.com/cloudwatch/home?region=eu-central-1#dashboards:name=KinesisLoadTestDashboard",
+    },
     "locustdashboardurl": {
       "Value": {
         "Fn::Join": [
@@ -78,6 +82,13 @@ exports[`KinesisLoadTestingWithLocustStack Snapshot test 1`] = `
       },
       "Type": "AWS::Kinesis::Stream",
       "UpdateReplacePolicy": "Delete",
+    },
+    "KinesisLoadTestDashboard": {
+      "Properties": {
+        "DashboardBody": "{"widgets":[{"type":"metric","x":0,"y":0,"width":6,"height":4,"properties":{"metrics":[["AWS/EC2","CPUUtilization","InstanceId","\${InstanceId}",{"label":"\${InstanceId} (TemperatureSensorDataProducer)","region":"eu-central-1"}],["...",{"stat":"Average","region":"eu-central-1"}]],"view":"timeSeries","stat":"Maximum","period":60,"stacked":false,"yAxis":{"left":{"min":0}},"region":"eu-central-1","title":"CPU utilization (%)"}},{"type":"metric","x":6,"y":0,"width":6,"height":4,"properties":{"metrics":[["AWS/EC2","StatusCheckFailed","InstanceId","\${InstanceId}",{"label":"\${InstanceId} (TemperatureSensorDataProducer)"}]],"view":"timeSeries","stat":"Average","period":60,"stacked":false,"yAxis":{"left":{"min":0}},"region":"eu-central-1","title":"Status check failed (any) (count)"}},{"type":"metric","x":12,"y":0,"width":6,"height":4,"properties":{"metrics":[["AWS/EC2","StatusCheckFailed_Instance","InstanceId","\${InstanceId}",{"label":"\${InstanceId} (TemperatureSensorDataProducer)"}]],"view":"timeSeries","stat":"Average","period":60,"stacked":false,"yAxis":{"left":{"min":0}},"region":"eu-central-1","title":"Status check failed (instance) (count)"}},{"type":"metric","x":18,"y":0,"width":6,"height":4,"properties":{"view":"timeSeries","stat":"Average","period":60,"stacked":false,"yAxis":{"left":{"min":0}},"region":"eu-central-1","metrics":[["AWS/EC2","StatusCheckFailed_System","InstanceId","\${InstanceId}",{"label":"\${InstanceId} (TemperatureSensorDataProducer)"}]],"title":"Status check failed (system) (count)"}},{"type":"metric","x":0,"y":4,"width":6,"height":4,"properties":{"view":"timeSeries","stat":"Average","period":60,"stacked":false,"yAxis":{"left":{"min":0}},"region":"eu-central-1","metrics":[["AWS/EC2","NetworkIn","InstanceId","\${InstanceId}",{"label":"\${InstanceId} (TemperatureSensorDataProducer)"}]],"title":"Network in (bytes)"}},{"type":"metric","x":6,"y":4,"width":6,"height":4,"properties":{"view":"timeSeries","stat":"Average","period":60,"stacked":false,"yAxis":{"left":{"min":0}},"region":"eu-central-1","metrics":[["AWS/EC2","NetworkOut","InstanceId","\${InstanceId}",{"label":"\${InstanceId} (TemperatureSensorDataProducer)"}]],"title":"Network out (bytes)"}},{"type":"metric","x":12,"y":4,"width":6,"height":4,"properties":{"view":"timeSeries","stat":"Average","period":60,"stacked":false,"yAxis":{"left":{"min":0}},"region":"eu-central-1","metrics":[["AWS/EC2","NetworkPacketsIn","InstanceId","\${InstanceId}",{"label":"\${InstanceId} (TemperatureSensorDataProducer)"}]],"title":"Network packets in (count)"}},{"type":"metric","x":18,"y":4,"width":6,"height":4,"properties":{"view":"timeSeries","stat":"Average","period":60,"stacked":false,"yAxis":{"left":{"min":0}},"region":"eu-central-1","metrics":[["AWS/EC2","NetworkPacketsOut","InstanceId","\${InstanceId}",{"label":"\${InstanceId} (TemperatureSensorDataProducer)"}]],"title":"Network packets out (count)"}},{"type":"metric","x":6,"y":8,"width":6,"height":4,"properties":{"metrics":[[{"expression":"200 * 1 * IF(m5, 1, 1)","label":"Incoming data Limit","id":"e6","color":"#d62728","region":"eu-central-1","period":60}],[{"expression":"m5/1024/1024/PERIOD(m5)","id":"e1","label":"Incoming data - sum (MB/s)","region":"eu-central-1","period":60}],["AWS/Kinesis","IncomingBytes","StreamName","\${StreamName}",{"id":"m5","visible":false,"stat":"Sum"}]],"region":"eu-central-1","yAxis":{"left":{"min":0,"showUnits":false}},"title":"Incoming data - sum (MB/s)","period":60,"view":"timeSeries","stacked":false,"stat":"Average"}},{"type":"metric","x":0,"y":8,"width":6,"height":4,"properties":{"metrics":[[{"expression":"200 *\\n              1000 * PERIOD(m6) * IF(m6, 1, 1)","label":"Incoming records Limit","id":"e6","color":"#d62728","period":60,"region":"eu-central-1"}],["AWS/Kinesis","IncomingRecords","StreamName","\${StreamName}",{"id":"m6","visible":true}]],"region":"eu-central-1","yAxis":{"left":{"min":0}},"stat":"Sum","title":"Incoming data - sum (Count)","period":60,"view":"timeSeries","stacked":false}},{"type":"metric","x":12,"y":8,"width":6,"height":4,"properties":{"metrics":[[{"expression":"m7/1024/1024/PERIOD(m7)","id":"e1","label":"PutRecord - sum (MB/s)","region":"eu-central-1","period":60}],["AWS/Kinesis","PutRecord.Bytes","StreamName","\${StreamName}",{"id":"m7","visible":false,"stat":"Sum"}]],"region":"eu-central-1","yAxis":{"left":{"min":0,"showUnits":false}},"title":"PutRecord - sum (MB/s)","period":60,"view":"timeSeries","stacked":false,"stat":"Average"}},{"type":"metric","x":18,"y":8,"width":6,"height":4,"properties":{"metrics":[["AWS/Kinesis","PutRecord.Latency","StreamName","\${StreamName}",{"id":"m8","visible":true}]],"region":"eu-central-1","yAxis":{"left":{"min":0}},"stat":"Average","title":"PutRecord latency - average (Milliseconds)","period":60,"view":"timeSeries","stacked":false}},{"type":"metric","x":6,"y":12,"width":6,"height":4,"properties":{"metrics":[["AWS/Kinesis","PutRecord.Success","StreamName","\${StreamName}",{"id":"m9","visible":true}]],"region":"eu-central-1","yAxis":{"left":{"min":0}},"stat":"Average","title":"PutRecord success - average (Percent)","period":60,"view":"timeSeries","stacked":false}},{"type":"metric","x":0,"y":12,"width":6,"height":4,"properties":{"metrics":[[{"expression":"m10/1024/1024/PERIOD(m10)","id":"e2","label":"PutRecords - sum (MB/s)","region":"eu-central-1","period":60}],["AWS/Kinesis","PutRecords.Bytes","StreamName","\${StreamName}",{"id":"m10","visible":false,"stat":"Sum"}]],"region":"eu-central-1","yAxis":{"left":{"min":0,"showUnits":false}},"title":"PutRecords - sum (MB/s)","period":60,"view":"timeSeries","stacked":false,"stat":"Average"}},{"type":"metric","x":12,"y":12,"width":6,"height":4,"properties":{"metrics":[["AWS/Kinesis","PutRecords.Latency","StreamName","\${StreamName}",{"id":"m11","visible":true}]],"region":"eu-central-1","yAxis":{"left":{"min":0}},"stat":"Average","title":"PutRecords latency - average (Milliseconds)","period":60,"view":"timeSeries","stacked":false}},{"type":"metric","x":12,"y":16,"width":6,"height":4,"properties":{"metrics":[["AWS/Kinesis","WriteProvisionedThroughputExceeded","StreamName","\${StreamName}",{"id":"m13","visible":true}]],"region":"eu-central-1","yAxis":{"left":{"min":0}},"stat":"Average","title":"Write throughput exceeded - average (Count)","period":60,"view":"timeSeries","stacked":false}},{"type":"metric","x":0,"y":16,"width":6,"height":4,"properties":{"metrics":[[{"expression":"(m11/m12) * 100","id":"e3","label":"PutRecords successful records - average (Percent)","region":"eu-central-1","period":60}],["AWS/Kinesis","PutRecords.SuccessfulRecords","StreamName","\${StreamName}",{"id":"m11","visible":false}],[".","PutRecords.TotalRecords",".",".",{"id":"m12","visible":false}]],"region":"eu-central-1","yAxis":{"left":{"min":0}},"title":"PutRecords successful records - average (Percent)","period":60,"view":"timeSeries","stacked":false,"stat":"Sum"}},{"type":"metric","x":6,"y":16,"width":6,"height":4,"properties":{"metrics":[[{"expression":"(m13/m12) * 100","id":"e4","label":"PutRecords failed records - average (Percent)","region":"eu-central-1","period":60}],["AWS/Kinesis","PutRecords.FailedRecords","StreamName","\${StreamName}",{"id":"m13","visible":false}],[".","PutRecords.TotalRecords",".",".",{"id":"m12","visible":false}]],"region":"eu-central-1","yAxis":{"left":{"min":0}},"title":"PutRecords failed records - average (Percent)","period":60,"view":"timeSeries","stacked":false,"stat":"Sum"}},{"type":"metric","x":18,"y":12,"width":6,"height":4,"properties":{"metrics":[[{"expression":"(m15/m12) * 100","id":"e5","label":"PutRecords throttled records - average (Percent)","region":"eu-central-1","period":60}],["AWS/Kinesis","PutRecords.ThrottledRecords","StreamName","\${StreamName}",{"id":"m15","visible":false}],[".","PutRecords.TotalRecords",".",".",{"id":"m12","visible":false}]],"region":"eu-central-1","yAxis":{"left":{"min":0}},"title":"PutRecords throttled records - average (Percent)","period":60,"view":"timeSeries","stacked":false,"stat":"Sum"}}],"variables":[{"type":"property","property":"InstanceId","inputType":"input","id":"InstanceId","label":"InstanceId","visible":true},{"type":"property","property":"StreamName","inputType":"input","id":"StreamName","label":"StreamName","visible":true}]}",
+        "DashboardName": "KinesisLoadTestDashboard",
+      },
+      "Type": "AWS::CloudWatch::Dashboard",
     },
     "LoadtestingVPC470E256F": {
       "Properties": {
@@ -155,7 +166,7 @@ exports[`KinesisLoadTestingWithLocustStack Snapshot test 1`] = `
             },
           ],
         },
-        "CidrBlock": "10.0.0.0/16",
+        "CidrBlock": "10.0.0.0/17",
         "MapPublicIpOnLaunch": true,
         "Tags": [
           {
@@ -169,6 +180,78 @@ exports[`KinesisLoadTestingWithLocustStack Snapshot test 1`] = `
           {
             "Key": "Name",
             "Value": "KinesisLoadTestingWithLocustStack/Load testing VPC/PublicSubnetSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "LoadtestingVPC470E256F",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "LoadtestingVPCPublicSubnetSubnet2DefaultRouteF3897131": {
+      "DependsOn": [
+        "LoadtestingVPCVPCGWE9D04917",
+      ],
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "LoadtestingVPCIGW333C72B1",
+        },
+        "RouteTableId": {
+          "Ref": "LoadtestingVPCPublicSubnetSubnet2RouteTableD6D5AF03",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "LoadtestingVPCPublicSubnetSubnet2RouteTableAssociationDACE7986": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "LoadtestingVPCPublicSubnetSubnet2RouteTableD6D5AF03",
+        },
+        "SubnetId": {
+          "Ref": "LoadtestingVPCPublicSubnetSubnet2Subnet78E98CED",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "LoadtestingVPCPublicSubnetSubnet2RouteTableD6D5AF03": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "KinesisLoadTestingWithLocustStack/Load testing VPC/PublicSubnetSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "LoadtestingVPC470E256F",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "LoadtestingVPCPublicSubnetSubnet2Subnet78E98CED": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.128.0/17",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "PublicSubnet",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          {
+            "Key": "Name",
+            "Value": "KinesisLoadTestingWithLocustStack/Load testing VPC/PublicSubnetSubnet2",
           },
         ],
         "VpcId": {
@@ -256,6 +339,7 @@ exports[`KinesisLoadTestingWithLocustStack Snapshot test 1`] = `
           "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amikernel510hvmarm64gp2C96584B6F00A464EAD1953AFF4B05118Parameter",
         },
         "InstanceType": "c7g.xlarge",
+        "Monitoring": true,
         "SecurityGroupIds": [
           {
             "Fn::GetAtt": [
@@ -284,7 +368,7 @@ aws s3 cp 's3://",
                 {
                   "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-eu-central-1",
                 },
-                "/2e1665d2bf9c57a5724ff1c911821aebe5cc0615554ac5fa46fda01a05e828b8.zip' '/usr/local/load-test/load-test-assets.zip'
+                "/ae6ae9aa5392591ce8c192604cb56981fdb5a4a236d7dad0d8d3063bb31124dc.zip' '/usr/local/load-test/load-test-assets.zip'
 mkdir -p $(dirname '/etc/systemd/system/locust.service')
 aws s3 cp 's3://",
                 {

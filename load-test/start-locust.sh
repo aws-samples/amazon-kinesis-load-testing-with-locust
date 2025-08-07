@@ -2,7 +2,15 @@
 
 source locust.env
 
-export REGION=$(curl --silent --retry 5 --retry-all-errors http://169.254.169.254/latest/meta-data/placement/region)
+# Get IMDSv2 token
+TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" \
+  -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+
+# Get region using the token with retries on transient failures
+REGION=$(curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \
+  --retry 5 --retry-all-errors \
+  http://169.254.169.254/latest/meta-data/placement/region)
+
 echo "Locust runs in $REGION"
 
 if [ -z "$LOCUST_NUMBER_OF_SECONDARIES" ]; then
